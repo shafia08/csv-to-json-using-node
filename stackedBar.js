@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 
+=======
+>>>>>>> c00c052f81c066b17e4ac3c1d77b1b7e20389d69
 var margin = {top: 20, right: 20, bottom: 30, left: 40},
     width = 960 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
@@ -20,16 +23,27 @@ var svg = d3.select(".importData").append("svg")
     .attr("height", height + margin.top + margin.bottom)
   .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+<<<<<<< HEAD
 d3.json("JSONFile_Bar.json", function(error, data) {
   if (error) throw error;
   color.domain(d3.keys(data[0]).filter(function(key) { return key !== "country"; }));
+=======
+d3.json("FirstFile.JSON", function(error, data) {
+  console.log(data);
+  if (error) throw error;
+  color.domain(d3.keys(data[0]).filter(function(key) { return key !== "country_name"; }));
+>>>>>>> c00c052f81c066b17e4ac3c1d77b1b7e20389d69
   data.forEach(function(d) {
     var y0 = 0;
     d.ages = color.domain().map(function(name) { return {name: name, y0: y0, y1: y0 += +d[name]}; });
     d.total = d.ages[d.ages.length - 1].y1;
   });
   data.sort(function(a, b) { return b.total - a.total; });
+<<<<<<< HEAD
   x.domain(data.map(function(d) { return d.country; }));
+=======
+  x.domain(data.map(function(d) { return d.country_name; }));
+>>>>>>> c00c052f81c066b17e4ac3c1d77b1b7e20389d69
   y.domain([0, d3.max(data, function(d) { return d.total; })]);
   svg.append("g")
       .attr("class", "x axis")
@@ -44,12 +58,21 @@ d3.json("JSONFile_Bar.json", function(error, data) {
       .attr("dy", ".71em")
       .style("text-anchor", "end")
       .text("Consuption");
+<<<<<<< HEAD
   var country = svg.selectAll(".country")
       .data(data)
     .enter().append("g")
       .attr("class", "g")
       .attr("transform", function(d) { return "translate(" + x(d.country) + ",0)"; });
   country.selectAll("rect")
+=======
+  var country_name = svg.selectAll(".country_name")
+      .data(data)
+    .enter().append("g")
+      .attr("class", "g")
+      .attr("transform", function(d) { return "translate(" + x(d.country_name) + ",0)"; });
+  country_name.selectAll("rect")
+>>>>>>> c00c052f81c066b17e4ac3c1d77b1b7e20389d69
       .data(function(d) { return d.ages; })
     .enter().append("rect")
       .attr("width", x.rangeBand())
